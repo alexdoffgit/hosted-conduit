@@ -6,7 +6,7 @@ function FormContainer() {
     const [togglePassword, setTogglePassword] = useState(false);
 
     return (
-        <form className="col-start-2 col-span-3 flex flex-col gap-3">
+        <form className="col-start-2 col-span-4 flex flex-col gap-3">
           <h1 className="text-center text-xl">Sign In</h1>
           <div className="flex flex-col gap-3">
             <div className="flex flex-col">
