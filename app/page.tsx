@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import { Inter } from 'next/font/google'
 import styles from '../styles/Home.module.css'
+import LogoutButton from './logout-button'
 
 export const metadata = {
     title: 'demo'
@@ -11,6 +12,7 @@ const inter = Inter({ subsets: ['latin'] })
 export default function Home() {
   return (
     <>
+      <LogoutButton />
       <main className={styles.main}>
         <div className={styles.description}>
           <p>

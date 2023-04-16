@@ -1,4 +1,5 @@
 import "../styles/globals.css";
+import SupabaseProvider from "./supabase-provider";
 
 export default function RootLayout({
   // Layouts must accept a children prop.
@@ -9,7 +10,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <SupabaseProvider>{children}</SupabaseProvider>
+      </body>
     </html>
   );
 }
