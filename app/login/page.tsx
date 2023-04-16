@@ -1,6 +1,8 @@
+"use client";
+
 import { useState } from "react";
-import EyeSlash from "./components/icons/EyeSlash";
-import Eye from "./components/icons/Eye";
+import EyeSlash from "@components/icons/EyeSlash";
+import Eye from "@components/icons/Eye";
 
 function FormContainer() {
     const [togglePassword, setTogglePassword] = useState(false);
