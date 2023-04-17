@@ -1,5 +1,5 @@
 import "../styles/globals.css";
-import SupabaseProvider from "./supabase-provider";
+import SupabaseProvider from "@components/supabase-provider";
 
 export default function RootLayout({
   // Layouts must accept a children prop.
@@ -11,7 +11,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <SupabaseProvider>{children}</SupabaseProvider>
+        <div className="w-full">
+          <SupabaseProvider>{children}</SupabaseProvider>
+        </div>
       </body>
     </html>
   );
