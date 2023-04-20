@@ -16,6 +16,7 @@ export interface Database {
           created_at: string | null
           description: string | null
           id: number
+          profile_id: number | null
           published: boolean
           slug: string
           title: string
@@ -27,6 +28,7 @@ export interface Database {
           created_at?: string | null
           description?: string | null
           id?: number
+          profile_id?: number | null
           published?: boolean
           slug: string
           title: string
@@ -38,6 +40,7 @@ export interface Database {
           created_at?: string | null
           description?: string | null
           id?: number
+          profile_id?: number | null
           published?: boolean
           slug?: string
           title?: string
@@ -46,62 +49,70 @@ export interface Database {
       }
       articles_tags: {
         Row: {
-          article_id: number | null
-          id: number
-          tag_id: number | null
+          article_id: number
+          tag_id: number
         }
         Insert: {
-          article_id?: number | null
-          id?: number
-          tag_id?: number | null
+          article_id: number
+          tag_id: number
         }
         Update: {
-          article_id?: number | null
-          id?: number
-          tag_id?: number | null
+          article_id?: number
+          tag_id?: number
         }
       }
       comments: {
         Row: {
-          article_id: number | null
-          author_id: string | null
+          article_id: number
+          auth_id: string
           body: string
-          created_at: string | null
-          id: number
-          updated_at: string | null
+          profile_id: number
         }
         Insert: {
-          article_id?: number | null
-          author_id?: string | null
+          article_id: number
+          auth_id: string
           body: string
-          created_at?: string | null
-          id?: number
-          updated_at?: string | null
+          profile_id: number
         }
         Update: {
-          article_id?: number | null
-          author_id?: string | null
+          article_id?: number
+          auth_id?: string
           body?: string
-          created_at?: string | null
-          id?: number
-          updated_at?: string | null
+          profile_id?: number
         }
       }
       favorites: {
         Row: {
-          article_id: number | null
-          id: number
-          user_id: string | null
+          article_id: number
+          auth_id: string
+          profile_id: number
         }
         Insert: {
-          article_id?: number | null
-          id?: number
-          user_id?: string | null
+          article_id: number
+          auth_id: string
+          profile_id: number
         }
         Update: {
-          article_id?: number | null
-          id?: number
-          user_id?: string | null
+          article_id?: number
+          auth_id?: string
+          profile_id?: number
+        }
+      }
+      followings: {
+        Row: {
+          auth_id: string | null
+          followed_id: number
+          follower_id: number
+        }
+        Insert: {
+          auth_id?: string | null
+          followed_id: number
+          follower_id: number
+        }
+        Update: {
+          auth_id?: string | null
+          followed_id?: number
+          follower_id?: number
         }
       }
       profiles: {
