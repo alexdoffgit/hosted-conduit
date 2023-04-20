@@ -15,6 +15,7 @@ export default function Home() {
         <div className="flex flex-col">
           <p className="text-green-500 ml-3">Global Feed</p>
         </div>
+        {/* @ts-expect-error Server Component */}
         <PreviewList />
       </div>
     </div>
