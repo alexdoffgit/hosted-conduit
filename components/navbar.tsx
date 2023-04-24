@@ -91,9 +91,8 @@ export default async function Navigation() {
   const { data } = await supabase.auth.getSession();
 
   if (data.session) {
-    {
-      /* @ts-expect-error Async Server Component */
-    }
+    // prettier-ignore
+    {/* @ts-expect-error Async Server Component */}
     return <AuthTopNav />;
   }
 
