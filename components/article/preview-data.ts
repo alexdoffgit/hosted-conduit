@@ -18,17 +18,22 @@ function toTags(arr: { tag_name: string }[] | null): string[] {
   return arr?.map((val) => val.tag_name) ?? [];
 }
 
-export async function fetchArticleData(): Promise<ArticlePreviewType[]> {
+export async function fetchArticleData(
+  searchQuery?: string,
+  tagsQuery?: string[]
+): Promise<ArticlePreviewType[]> {
   const supabase = createServerClient();
   let articlePreviews: ArticlePreview[] = [];
   const { data: authData, error: authError } = await supabase.auth.getSession();
-  const articleDB =
-    (
-      await supabase
-        .from("articles")
-        .select("id,updated_at,title,description,slug,profile_id")
-        .eq("published", true)
-    ).data ?? [];
+  let articleQuery = supabase
+    .from("articles")
+    .select("id,updated_at,title,description,slug,profile_id")
+    .eq("published", true);
+  if (searchQuery) {
+    articleQuery = articleQuery.textSearch("searchable", `${searchQuery}`);
+  }
+
+  const articleDB = (await articleQuery).data ?? [];
   for (let article of articleDB) {
     let articleBuilder = ArticlePreview.builder();
     articleBuilder.withArticleDate(article.updated_at!);
@@ -69,20 +74,33 @@ export async function fetchArticleData(): Promise<ArticlePreviewType[]> {
         .select("*", { count: "exact", head: true })
         .eq("article_id", article.profile_id)
     ).count;
-    articleBuilder.withFavoritesCount(favoritesCount ?? 0)
-    const articleTagsDB = (await supabase.from('articles_tags').select().eq('article_id', article.id)).data ?? []
-    let tags: string[] = []
-    for(let articleTag of articleTagsDB) {
-      const tagDB = (await supabase.from('tags').select().eq('id', articleTag.tag_id).limit(1).single()).data
-      if(tagDB) {
-        tags.push(tagDB.tag_name)
+    articleBuilder.withFavoritesCount(favoritesCount ?? 0);
+    const articleTagsDB =
+      (
+        await supabase
+          .from("articles_tags")
+          .select()
+          .eq("article_id", article.id)
+      ).data ?? [];
+    let tags: string[] = [];
+    for (let articleTag of articleTagsDB) {
+      const tagDB = (
+        await supabase
+          .from("tags")
+          .select()
+          .eq("id", articleTag.tag_id)
+          .limit(1)
+          .single()
+      ).data;
+      if (tagDB) {
+        tags.push(tagDB.tag_name);
       }
     }
-    articleBuilder.withTags(tags)
-    articlePreviews.push(articleBuilder)
+    articleBuilder.withTags(tags);
+    articlePreviews.push(articleBuilder);
   }
 
-  return articlePreviews.map(v => ({
+  return articlePreviews.map((v) => ({
     articleDate: v.articleDate,
     description: v.description,
     favorited: v.favorited,
@@ -91,6 +109,6 @@ export async function fetchArticleData(): Promise<ArticlePreviewType[]> {
     tags: v.tags,
     title: v.title,
     username: v.username,
-    profilePic: v.profilePic
+    profilePic: v.profilePic,
   }));
 }

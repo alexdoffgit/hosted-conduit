@@ -1,8 +1,8 @@
 "use client";
 
 import { FormEvent, useState } from "react";
-import EyeSlash from "@components/icons/EyeSlash";
-import Eye from "@components/icons/Eye";
+import EyeSlash from "@components/icons/eye-slash";
+import Eye from "@components/icons/eye";
 import { useSupabase } from "@components/supabase-provider";
 import { useRouter } from "next/navigation";
 import { AuthError } from "@supabase/supabase-js";

@@ -18,6 +18,7 @@ export interface Database {
           id: number
           profile_id: number | null
           published: boolean
+          searchable: unknown | null
           slug: string
           title: string
           updated_at: string | null
@@ -30,6 +31,7 @@ export interface Database {
           id?: number
           profile_id?: number | null
           published?: boolean
+          searchable?: unknown | null
           slug: string
           title: string
           updated_at?: string | null
@@ -42,6 +44,7 @@ export interface Database {
           id?: number
           profile_id?: number | null
           published?: boolean
+          searchable?: unknown | null
           slug?: string
           title?: string
           updated_at?: string | null
