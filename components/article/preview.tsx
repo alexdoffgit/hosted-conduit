@@ -31,8 +31,8 @@ export default function Preview(props: Props) {
           favorited={props.favorited}
         />
       </div>
-      <Title content={props.title} />
-      <Description content={props.description} />
+      <Title content={props.title} slug={props.slug} />
+      <Description content={props.description} slug={props.slug} />
       <div className="flex justify-between items-center">
         <ReadMoreLink href={`/article/${props.slug}`} />
         <Tags names={props.tags} />
