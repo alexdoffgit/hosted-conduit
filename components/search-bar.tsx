@@ -23,7 +23,7 @@ export default function SearchBar() {
   const [search, setSearch] = useState("");
   const router = useRouter();
   const pathName = usePathname();
-  const searchParams = useSearchParams();
+  const searchParams = useSearchParams() as unknown as string | string[][] | Record<string, string> | URLSearchParams ;
   const createQueryString = useCallback(
     (name: string, value: string) => {
       const params = new URLSearchParams(searchParams);
