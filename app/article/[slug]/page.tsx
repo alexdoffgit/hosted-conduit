@@ -7,6 +7,10 @@ import { fetchArticleData } from "./fetch-data";
 import { Hero } from "./hero";
 import { ReactNode } from "react";
 import { Body } from "./body";
+import avatar from "../../../assets/default-avatar.jpg";
+import Image from "next/image";
+import Link from "next/link";
+import { CommentForm } from "./comment-form";
 
 export default async function ArticlePage({
   params,
@@ -16,6 +20,8 @@ export default async function ArticlePage({
   const fetchedArticle = await fetchArticleData(params.slug);
   let HeroComponent: ReactNode | null = null;
   let ArticleComponent: ReactNode | null = null;
+  let CommentProfile: ReactNode | null = null;
+  let CommentFormComponent: ReactNode | null = null;
 
   if (fetchedArticle.article) {
     HeroComponent = (
@@ -27,7 +33,36 @@ export default async function ArticlePage({
       />
     );
 
-    ArticleComponent = <Body html={fetchedArticle.article.body} />
+    ArticleComponent = <Body html={fetchedArticle.article.body} />;
+
+    CommentProfile = (
+      <div className="col-start-2 col-span-10 flex items-center justify-center my-4">
+        <div className="flex gap-3">
+          <Image
+            alt="profile pic"
+            src={fetchedArticle.article.author.image ?? avatar}
+            width={36}
+            height={36}
+          />
+          <div className="flex flex-col">
+            <Link href={`/${fetchedArticle.article.author.username}`}>
+              <p className="text-md">
+                {fetchedArticle.article.author.username}
+              </p>
+            </Link>
+            <p className="text-xs">{fetchedArticle.article.updatedAt}</p>
+          </div>
+          <button className="border border-slate-500 text-slate-600 rounded-sm p-1">
+            follow {fetchedArticle.article.author.username}
+          </button>
+          <button className="border border-green-500 rounded-sm text-green-500 p-1">
+            favorite article
+          </button>
+        </div>
+      </div>
+    );
+
+    CommentFormComponent = <CommentForm slug={params.slug} />
   }
 
   return (
@@ -36,6 +71,9 @@ export default async function ArticlePage({
       <Navigation />
       {HeroComponent}
       {ArticleComponent}
+      <hr className="col-start-2 col-span-10" />
+      {CommentProfile}
+      {CommentFormComponent}
     </div>
   );
 }
