@@ -27,7 +27,7 @@ async function AuthTopNav() {
     }
     if (data) {
       userlink = (
-        <Link href={"/"}>
+        <Link href={`/${data.username}`}>
           <p className="text-white">{data.username}</p>
         </Link>
       );
@@ -86,6 +86,7 @@ function TopNav() {
   );
 }
 
+// TODO: export another version that doesn't use search
 export default async function Navigation() {
   const supabase = createServerClient();
   const { data } = await supabase.auth.getSession();
