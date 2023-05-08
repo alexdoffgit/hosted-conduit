@@ -1,11 +1,11 @@
 import "server-only";
 import { createServerClient } from "@utils/supabase-server";
-import sanitizeHtml from "sanitize-html";
 import addClasses from "./add-classes";
 import { unified } from "unified";
 import remarkParse from "remark-parse";
 import remarkRehype from "remark-rehype";
 import rehypeStringify from "rehype-stringify";
+import rehypeSanitize from "rehype-sanitize";
 
 type Article = {
   id: number;
@@ -43,7 +43,9 @@ export async function fetchArticleData(slug: string): Promise<FetchedArticle> {
         .use(remarkParse)
         .use(remarkRehype)
         .use(addClasses)
-        .use(rehypeStringify as any);
+        // @ts-expect-error
+        .use(rehypeSanitize)
+        .use(rehypeStringify);
 
       return {
         article: {
