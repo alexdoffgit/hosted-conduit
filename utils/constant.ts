@@ -1,0 +1,1 @@
+export const ROW_NOT_FOUND = "PGRST116"
