@@ -10,7 +10,7 @@ type Props = {
 };
 
 export function CommentForm(props: Props) {
-  const sessionId = useSessionId();
+  const { sessionId } = useSessionId();
   const { supabase } = useSupabase();
   const [comment, setComment] = useState("");
 
@@ -34,14 +34,12 @@ export function CommentForm(props: Props) {
       return;
     }
 
-    await supabase
-      .from("comments")
-      .insert({
-        article_id: article!.id,
-        auth_id: sessionId!,
-        body: comment,
-        profile_id: profile.data.id,
-      });
+    await supabase.from("comments").insert({
+      article_id: article!.id,
+      auth_id: sessionId!,
+      body: comment,
+      profile_id: profile.data.id,
+    });
   };
 
   if (sessionId) {
