@@ -5,7 +5,7 @@ import type { NextRequest } from "next/server";
 import type { Database } from "@utils/database.types";
 
 export async function middleware(req: NextRequest) {
-  const protectedRoutes = ['/editor', '/settings']
+  const protectedRoutes = ['/editor', '/settings', '/draft']
   
   const res = NextResponse.next();
   const supabase = createMiddlewareSupabaseClient<Database>({ req, res });
