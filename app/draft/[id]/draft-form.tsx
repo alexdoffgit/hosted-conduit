@@ -84,7 +84,7 @@ export function DraftForm(props: Props) {
           />
         </div>
         <div className="flex flex-col">
-          <label className="text-lg">Title</label>
+          <label className="text-lg">Body</label>
           <textarea
             className="border border-slate-400 rounded-sm p-1"
             value={article.body}
