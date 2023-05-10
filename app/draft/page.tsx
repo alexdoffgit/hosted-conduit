@@ -1,6 +1,6 @@
 import "server-only"
 import Link from "next/link";
-import Navigation from "@components/navbar";
+import {Navigation} from "@components/navbar";
 import { getDrafts } from "./get-drafts";
 
 export default async function Drafts() {
