@@ -5,7 +5,7 @@ import type { NextRequest } from "next/server";
 import type { Database } from "@utils/database.types";
 
 export async function middleware(req: NextRequest) {
-  const protectedRoutes = ['/editor', '/settings', '/draft']
+  const protectedRoutes = ['/editor', '/settings', '/draft', '/write']
   
   const res = NextResponse.next();
   const supabase = createMiddlewareSupabaseClient<Database>({ req, res });
@@ -16,7 +16,7 @@ export async function middleware(req: NextRequest) {
   for (let route of protectedRoutes) {
     if(!session && req.nextUrl.pathname.startsWith(route)) {
       const redirectUrl = req.nextUrl.clone();
-      redirectUrl.pathname = '/';
+      redirectUrl.pathname = '/login';
       return NextResponse.redirect(redirectUrl)
     }
   }

@@ -50,8 +50,8 @@ async function SearchAuthTopNav() {
           <Link href={"/settings"}>
             <p className="text-white">Settings</p>
           </Link>
-          <Link href={"/editor"}>
-            <p className="text-white">New Article</p>
+          <Link href={"/write"}>
+            <p className="text-white">Write</p>
           </Link>
           {userlink}
         </nav>
@@ -130,8 +130,8 @@ async function AuthTopNav() {
           <Link href={"/settings"}>
             <p className="text-white">Settings</p>
           </Link>
-          <Link href={"/editor"}>
-            <p className="text-white">New Article</p>
+          <Link href={"/write"}>
+            <p className="text-white">Write</p>
           </Link>
           {userlink}
         </nav>
