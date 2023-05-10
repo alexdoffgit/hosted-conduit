@@ -44,7 +44,7 @@ export async function fetchArticleData(slug: string): Promise<FetchedArticle> {
         .use(remarkRehype)
         .use(addClasses)
         // @ts-expect-error
-        .use(rehypeSanitize)
+        // .use(rehypeSanitize)
         .use(rehypeStringify);
 
       return {
