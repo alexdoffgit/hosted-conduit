@@ -2,7 +2,7 @@
 // convert body markdown to html
 // sanitize html
 
-import Navigation from "@components/navbar";
+import {Navigation} from "@components/navbar";
 import { fetchArticleData } from "./fetch-data";
 import { Hero } from "./hero";
 import { ReactNode } from "react";

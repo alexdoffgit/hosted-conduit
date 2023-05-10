@@ -1,4 +1,4 @@
-import Navigation from "@components/navbar";
+import {Navigation} from "@components/navbar";
 import { DraftForm } from "./draft-form";
 
 export default function CreateDraft({ params }: { params: { id: string } }) {

@@ -1,4 +1,4 @@
-import Navigation from "@components/navbar";
+import {Navigation} from "@components/navbar";
 import { Form } from "./form";
 
 export default function Settings() {

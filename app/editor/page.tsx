@@ -1,4 +1,4 @@
-import Navigation from "@components/navbar";
+import {Navigation} from "@components/navbar";
 import { CreateArticleForm } from "./form";
 
 export default function CreateArticle() {
